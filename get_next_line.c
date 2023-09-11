@@ -6,7 +6,7 @@
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:06:15 by takumi            #+#    #+#             */
-/*   Updated: 2023/09/06 23:44:00 by takumi           ###   ########.fr       */
+/*   Updated: 2023/09/07 00:25:59 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ char *makeline(int fd,char *buff, char *save)
         judge = read(fd, buff, BUFFER_SIZE);
         if(judge == -1)
             return NULL;
+        if(judge == 0)
+            break;
+        buff[judge] = '\0';
         if(save == NULL)
         {
             save = malloc(sizeof(char) * 1);
@@ -41,6 +44,7 @@ char * asd(char* buff)
     char *buffer;
     int n_number;
     char* self;
+    
     n_number = 0;
     while(buff[n_number] != '\0')
     {
@@ -48,12 +52,12 @@ char * asd(char* buff)
             break;
         n_number++;
     }
-    buffer = ft_substr(buff,0, n_number);
+    buffer = ft_substr(buff, 0, n_number);
     self = ft_substr(buff, n_number + 1, ft_strlen(buff) - n_number);
-    free(buff);
-    buff = buffer;
-    return (self);
-    
+    // free(buff);
+    // buff = buffer;
+    buff[n_number +1] = '\0';
+    return (self);   
 }
 
 
@@ -77,13 +81,19 @@ char *get_next_line(int fd)
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <fcntl.h>
 int main()
 {
-	int fd;
-	char *line;
+    int fd;
+    int i = 1;
+    char *line;
 
-	fd = open("test.txt", O_RDONLY);
-	while ((line = get_next_line(fd))> 0)
-	printf("%s", line);
-	return (0);
+    fd = open("test.txt", O_RDONLY);
+    while ((line = get_next_line(fd))> 0){
+        printf("%d === %s", i, line);
+        free(line);
+        i++;
+    }
+    return (0);
 }
