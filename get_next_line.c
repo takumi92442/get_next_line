@@ -6,7 +6,7 @@
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:06:15 by takumi            #+#    #+#             */
-/*   Updated: 2023/09/07 00:25:59 by takumi           ###   ########.fr       */
+/*   Updated: 2023/09/11 17:56:15 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ char *makeline(int fd,char *buff, char *save)
 
 char * asd(char* buff)
 {
-    char *buffer;
     int n_number;
     char* self;
     
@@ -52,19 +51,31 @@ char * asd(char* buff)
             break;
         n_number++;
     }
-    buffer = ft_substr(buff, 0, n_number);
     self = ft_substr(buff, n_number + 1, ft_strlen(buff) - n_number);
-    // free(buff);
-    // buff = buffer;
-    buff[n_number +1] = '\0';
     return (self);   
 }
 
+char * asd2(char *buff)
+{
+    char *buffer;
+    int n_number;
+    
+    n_number = 0;
+    while(buff[n_number] != '\0')
+    {
+        if(buff[n_number] == '\n')
+            break;
+        n_number++;
+    }
+    buffer = ft_substr(buff, 0, n_number);
+    return (buffer);
+}
 
 char *get_next_line(int fd)
 {
     char *buff;
     char *line;
+    char *buff2;
     static char *save[OPEN_MAX];
 
     if(fd < 0 || BUFFER_SIZE <= 0 || OPEN_MAX <= fd)
@@ -74,8 +85,12 @@ char *get_next_line(int fd)
         return NULL;
     line = makeline(fd, buff, save[fd]);
     free(buff);
-    if(line != NULL)
+    if(line != NULL){
         save[fd] = asd(line);
+        buff2 = asd2(line);
+        free(line);
+        return (buff2);
+    }
     return (line);
 }
 
