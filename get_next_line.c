@@ -6,13 +6,13 @@
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:06:15 by takumi            #+#    #+#             */
-/*   Updated: 2023/09/11 17:56:15 by takumi           ###   ########.fr       */
+/*   Updated: 2023/09/11 18:54:39 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *makeline(int fd,char *buff, char *save)
+static char *makeline(int fd,char *buff, char *save)
 {
     char* buff_save;
     int judge;
@@ -39,7 +39,7 @@ char *makeline(int fd,char *buff, char *save)
     return (save);
 }
 
-char * asd(char* buff)
+static char * get_line_after_newline(char* buff)
 {
     int n_number;
     char* self;
@@ -52,10 +52,17 @@ char * asd(char* buff)
         n_number++;
     }
     self = ft_substr(buff, n_number + 1, ft_strlen(buff) - n_number);
+    if(self == NULL)
+        return (NULL);
+    if(self[0] == '\0')
+    {
+        free(self);
+        return (NULL);
+    }
     return (self);   
 }
 
-char * asd2(char *buff)
+static char * get_line_before_newline(char *buff)
 {
     char *buffer;
     int n_number;
@@ -67,7 +74,7 @@ char * asd2(char *buff)
             break;
         n_number++;
     }
-    buffer = ft_substr(buff, 0, n_number);
+    buffer = ft_substr(buff, 0, n_number + 1);
     return (buffer);
 }
 
@@ -86,8 +93,8 @@ char *get_next_line(int fd)
     line = makeline(fd, buff, save[fd]);
     free(buff);
     if(line != NULL){
-        save[fd] = asd(line);
-        buff2 = asd2(line);
+        save[fd] = get_line_after_newline(line);
+        buff2 = get_line_before_newline(line);
         free(line);
         return (buff2);
     }
@@ -98,17 +105,40 @@ char *get_next_line(int fd)
 #include <fcntl.h>
 #include <stdio.h>
 #include <fcntl.h>
-int main()
-{
-    int fd;
-    int i = 1;
-    char *line;
+// int main()
+// {
+//     int fd;
+//     int fd2;
+//     int i = 1;
+//     char *line;
 
-    fd = open("test.txt", O_RDONLY);
-    while ((line = get_next_line(fd))> 0){
-        printf("%d === %s", i, line);
-        free(line);
-        i++;
-    }
-    return (0);
-}
+//     fd = open("test.txt", O_RDONLY);
+//     fd2 = open("test2.txt", O_RDONLY);
+//     while ((line = get_next_line(fd)) ){
+//         printf("%d === %s", i, line);
+//         free(line);
+//         i++;
+//     }
+//     return (0);
+// }
+
+// int main()
+// {
+//     int fd;
+//     int fd2;
+//     int i = 1;
+//     char *line;
+
+//     fd = open("test.txt", O_RDONLY);
+//     fd2 = open("test2.txt", O_RDONLY);
+//     while (i <= 10 ){
+//         line = get_next_line(fd);
+//         printf("%d === %s", i, line);
+//         free(line);
+//         line = get_next_line(fd2);
+//         printf("%d === %s", i, line);
+//         free(line);
+//         i++;
+//     }
+//     return (0);
+// }

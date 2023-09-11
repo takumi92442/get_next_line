@@ -1,1 +1,9 @@
-abcef
+total 128
+-rwxr-xr-x  1 takumi  staff  50008  9 11 18:02 a.out
+drwxr-xr-x  3 takumi  staff     96  9  6 23:45 a.out.dSYM
+-rw-r--r--  1 takumi  staff   2894  9 11 18:03 get_next_line.c
+-rw-r--r--  1 takumi  staff   1307  9  6 23:43 get_next_line.h
+-rw-r--r--  1 takumi  staff   2292  9 11 16:15 get_next_line_utils.c
+-rw-r--r--  1 takumi  staff      0  9 11 18:03 test.txt
+asdfghj
+asdfghjqwerty
