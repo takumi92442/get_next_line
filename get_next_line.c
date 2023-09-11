@@ -6,7 +6,7 @@
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 17:06:15 by takumi            #+#    #+#             */
-/*   Updated: 2023/09/11 18:54:39 by takumi           ###   ########.fr       */
+/*   Updated: 2023/09/11 22:30:05 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static char *makeline(int fd,char *buff, char *save)
         if(save == NULL)
         {
             save = malloc(sizeof(char) * 1);
+            if(save == NULL)
+                return (NULL);   
             save[0] = '\0';
         }
         buff_save = save;
