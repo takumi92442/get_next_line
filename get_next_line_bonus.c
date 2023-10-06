@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 17:06:15 by takumi            #+#    #+#             */
-/*   Updated: 2023/09/11 23:52:30 by takumi           ###   ########.fr       */
+/*   Created: 2023/09/11 23:57:34 by takumi            #+#    #+#             */
+/*   Updated: 2023/10/06 17:47:25 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*create_empty_string(void)
 {
@@ -132,25 +132,30 @@ char	*get_next_line(int fd)
 //     return (0);
 // }
 
-// #include<stdio.h>
+#include<stdio.h>
 
-// int main()
-// {
-//     int fd;
-//     int fd2;
-//     int i = 1;
-//     char *line;
+int main()
+{
+    int fd;
+    int fd2;
+    int i = 1;
+    char *line;
 
-//     fd = open("test.txt", O_RDONLY);
-//     fd2 = open("test2.txt", O_RDONLY);
-//     while (i <= 10 ){
-//         line = get_next_line(fd);
-//         printf("%d === %s", i, line);
-//         free(line);
-//         line = get_next_line(fd2);
-//         printf("%d === %s", i, line);
-//         free(line);
-//         i++;
-//     }
-//     return (0);
-// }
+    fd = open("test.txt", O_RDONLY);
+    fd2 = open("test2.txt", O_RDONLY);
+    while (i <= 10 ){
+        line = get_next_line(fd);
+        printf("%d === %s", i, line);
+        free(line);
+        line = get_next_line(fd2);
+        printf("%d === %s", i, line);
+        free(line);
+        i++;
+    }
+    return (0);
+}
+
+__attribute__((destructor)) static void destructor()
+{
+    system("leaks -q a.out");
+}

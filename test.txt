@@ -1,9 +1,0 @@
-/Users/takumi/.pyenv/shims:
-/Users/takumi/.pyenv/bin:
-/usr/local/bin:
-/usr/bin:
-/bin:
-/usr/sbin:
-/sbin:
-/Users/takumi/.pyenv/bin:
-/Users/takumi/.pyenv/versions/3.11.4/lib/python3.11/site-packages
