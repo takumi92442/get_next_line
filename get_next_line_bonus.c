@@ -6,7 +6,7 @@
 /*   By: takumi <takumi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 23:57:34 by takumi            #+#    #+#             */
-/*   Updated: 2023/10/06 17:47:25 by takumi           ###   ########.fr       */
+/*   Updated: 2023/10/28 23:07:37 by takumi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,30 +132,30 @@ char	*get_next_line(int fd)
 //     return (0);
 // }
 
-#include<stdio.h>
+// #include<stdio.h>
 
-int main()
-{
-    int fd;
-    int fd2;
-    int i = 1;
-    char *line;
+// int main()
+// {
+//     int fd;
+//     int fd2;
+//     int i = 1;
+//     char *line;
 
-    fd = open("test.txt", O_RDONLY);
-    fd2 = open("test2.txt", O_RDONLY);
-    while (i <= 10 ){
-        line = get_next_line(fd);
-        printf("%d === %s", i, line);
-        free(line);
-        line = get_next_line(fd2);
-        printf("%d === %s", i, line);
-        free(line);
-        i++;
-    }
-    return (0);
-}
+//     fd = open("test.txt", O_RDONLY);
+//     fd2 = open("test2.txt", O_RDONLY);
+//     while (i <= 10 ){
+//         line = get_next_line(fd);
+//         printf("%d === %s", i, line);
+//         free(line);
+//         line = get_next_line(fd2);
+//         printf("%d === %s", i, line);
+//         free(line);
+//         i++;
+//     }
+//     return (0);
+// }
 
-__attribute__((destructor)) static void destructor()
-{
-    system("leaks -q a.out");
-}
+// __attribute__((destructor)) static void destructor()
+// {
+//     system("leaks -q a.out");
+// }
